@@ -25,7 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     if (mysqli_stmt_execute($stmt)) {
-        $message = "Vehicle registered successfully!";
+          mysqli_stmt_close($stmt);
+
+    header("Location: register_vehicle.php");
+    exit;
     } else {
         $message = "Registration failed: " . mysqli_stmt_error($stmt);
     }

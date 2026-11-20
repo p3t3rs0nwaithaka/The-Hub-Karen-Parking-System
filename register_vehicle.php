@@ -1,61 +1,73 @@
 <?php
-include "db_connect.php";
+
+include "db_connect_online.php";
 
 $result = mysqli_query($connection, "SELECT * FROM vehicles");
+
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Registered Vehicles</title>
 </head>
+
 <body>
 
-<h1>THE HUB KAREN MALL</h1>
-<h2>Vehicle Management System</h2>
-<hr>
+    <h1>THE HUB KAREN MALL</h1>
 
-<h2>REGISTERED VEHICLES</h2>
+    <h2>Vehicle Management System</h2>
 
-<a href="vehicles.php">Register New Vehicle</a>
+    <hr>
 
-<br><br>
+    <h2>REGISTERED VEHICLES</h2>
 
-<table border="1" cellpadding="12" cellspacing="0">
+    <a href="/vehicles_online.php">Register New Vehicle</a>
 
-    <tr>
-        <th>ID</th>
-        <th>Registration Number</th>
-        <th>Vehicle Type</th>
-        <th>Owner Name</th>
-    </tr>
+    <br><br>
 
-    <?php
-    if ($result && mysqli_num_rows($result) > 0) {
+    <table border="1" cellpadding="12" cellspacing="0">
 
-        while ($row = mysqli_fetch_assoc($result)) {
-    ?>
+        <tr>
+            <th>ID</th>
+            <th>Registration Number</th>
+            <th>Vehicle Type</th>
+            <th>Owner Name</th>
+        </tr>
 
-    <tr>
-        <td><?php echo htmlspecialchars($row['id']); ?></td>
-        <td><?php echo htmlspecialchars($row['registration_number']); ?></td>
-        <td><?php echo htmlspecialchars($row['vehicle_type']); ?></td>
-        <td><?php echo htmlspecialchars($row['owner_name']); ?></td>
-    </tr>
+        <?php
 
-    <?php
+        if ($result && mysqli_num_rows($result) > 0) {
+
+            while ($row = mysqli_fetch_assoc($result)) {
+
+        ?>
+
+        <tr>
+            <td><?php echo htmlspecialchars($row['id']); ?></td>
+            <td><?php echo htmlspecialchars($row['registration_number']); ?></td>
+            <td><?php echo htmlspecialchars($row['vehicle_type']); ?></td>
+            <td><?php echo htmlspecialchars($row['owner_name']); ?></td>
+        </tr>
+
+        <?php
+            }
+
+        } else {
+
+            echo "<tr><td colspan='4'>No vehicles registered yet.</td></tr>";
+
         }
 
-    } else {
-        echo "<tr><td colspan='4'>No vehicles registered yet.</td></tr>";
-    }
-    ?>
+        ?>
 
-</table>
+    </table>
 
-<br><br>
+    <br><br>
 
-<a href="index.php">Back to Dashboard</a>
+    <a href="index.php">Back to Dashboard</a>
 
 </body>
+
 </html>
